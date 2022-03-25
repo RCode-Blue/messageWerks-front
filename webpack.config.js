@@ -7,7 +7,7 @@ const VENDOR_LIBS = ["react", "react-dom"];
 var config = {
   mode: "development",
   entry: {
-    bundle: "./src/v1/index.js",
+    bundle: "./src/index.js",
     vendor: VENDOR_LIBS,
   },
   output: {
@@ -30,6 +30,10 @@ var config = {
       {
         use: ["style-loader", "css-loader"],
         test: /\.css$/,
+      },
+      {
+        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.s[ac]ss$/i,
       },
     ],
   },
