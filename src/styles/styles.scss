@@ -1,7 +1,17 @@
-// base
+// Definitions
 @import "./base/variables";
 @import "./base/vendors";
 @import "./base/base";
 
-// fonts
+// Base
+@import "./components/app";
+
+// Fonts
 @import "./externals/michegar.scss";
+
+// Headers
+@import "./shared/logo";
+
+// Content
+@import "./shared/content";
+@import "./components/landing";

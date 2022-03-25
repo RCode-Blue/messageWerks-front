@@ -1,0 +1,8 @@
+.styled-links {
+  text-decoration: none;
+  &:hover {
+    color: $colour-brown-3;
+    font-style: italic;
+    cursor: default;
+  }
+}

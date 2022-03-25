@@ -13,4 +13,12 @@ $colour-brown-3: #ffda82;
 
 // Fonts
 // Logo Font
-$font-logo: Michegar;
+$font-fam-logo: Michegar, Pacifico, Trebuchet MS, Helvetica;
+$font-fam-content: Ubuntu, Lato, Trebuchet MS, Helvetica;
+
+// Font sizes
+$font-size-highlight: 3rem;
+$font-size-heading: 2.8rem;
+
+// Secondary definitions
+$background-colour: $colour-slate-3;

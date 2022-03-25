@@ -1,4 +1,17 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
   color: $colour-yellow-1;
-  background-color: $colour-slate-3;
+  background-color: $background-colour;
+  font-family: $font-fam-content;
 }
