@@ -1,3 +1,24 @@
+// Content body
+/* #region */
+.login-form {
+  form {
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  input {
+    margin: 2rem;
+    padding: 0.5rem;
+    font-size: 2rem;
+  }
+}
+
+/* #endregion */
+
+// Links
+/* #region */
+
 .styled-link {
   text-decoration: none;
   &:visited {
@@ -19,3 +40,5 @@
     font-style: italic;
   }
 }
+
+/* #endregion */
