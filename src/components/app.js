@@ -1,21 +1,25 @@
 import React from "react";
-import { render } from "react-dom";
+import ReactDOM from "react-dom";
 
-import { BrowserRouter, Link, Route, Routes, Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
+import Logo from "./main/logo";
 import Landing from "./landing/landing";
+import Login from "./landing/login";
 
 import "../styles/styles.scss";
 
 function App() {
-  // console.log(process.env.NODE_ENV);
   return (
     <div className="App app-wrapper">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-        </Routes>
-      </BrowserRouter>
+      <Logo />
+      {/* <Landing /> */}
+      {/* <Router> */}
+      <Routes>
+        <Route path="/" element={<Landing />}></Route>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      {/* </Router> */}
     </div>
   );
 }

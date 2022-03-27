@@ -1,8 +1,21 @@
-.styled-links {
+.styled-link {
   text-decoration: none;
+  &:visited {
+    color: $link-colour;
+  }
+}
+
+.logo-hover {
+  &:hover {
+    cursor: default;
+    font-style: normal;
+  }
+}
+
+.styled-hover {
   &:hover {
     color: $colour-brown-3;
-    font-style: italic;
     cursor: default;
+    font-style: italic;
   }
 }
