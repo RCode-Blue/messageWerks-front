@@ -10,7 +10,7 @@ const PasswordField = (props) => {
   };
 
   return (
-    <div>
+    <div className="password-field">
       <input
         type={fieldType}
         placeholder="password *"

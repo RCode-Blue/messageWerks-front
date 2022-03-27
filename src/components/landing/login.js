@@ -36,7 +36,7 @@ const Login = () => {
           password={password}
         />
 
-        <input type="submit" value="Log in" />
+        <button type="submit">Login</button>
       </form>
     </div>
   );
