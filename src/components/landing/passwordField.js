@@ -9,11 +9,13 @@ const PasswordField = (props) => {
     setFieldType(newFieldType);
   };
 
+  console.log("props: ", props);
+
   return (
     <div className="password-field">
       <input
         type={fieldType}
-        placeholder="password *"
+        placeholder={props.placeholder}
         onChange={props.onPasswordChange}
         value={props.password}
       ></input>
