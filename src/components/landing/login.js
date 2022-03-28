@@ -7,6 +7,11 @@ const Login = () => {
   const [entriesValid, setEntriesValid] = useState(true);
   const [emailValidityString, setEmailValidityString] = useState("");
   const [passwordValidityString, setPasswordValidityString] = useState("");
+  const [emailIsValid, setEmailIsValid] = useState("true");
+  const [passwordIsValid, setPasswordIsValid] = useState("true");
+
+  const emailErrorMessage = "error: invalid email address";
+  const passwordErrorMessage = "error: password is invalid";
 
   const onEmailChange = (e) => {
     const email = e.target.value;
@@ -19,42 +24,40 @@ const Login = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    let emailIsValid = false;
-    let passwordIsValid = false;
+    // let emailIsValid = false;
+    // let passwordIsValid = false;
 
     if (password === "") {
-      setPasswordValidityString("error: password is invalid");
-      passwordIsValid = false;
+      setPasswordValidityString(passwordErrorMessage);
+      setPasswordIsValid(false);
     } else {
       setPasswordValidityString("");
-      passwordIsValid = true;
+      setPasswordIsValid(true);
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      setEmailValidityString("error: invalid email address");
-      emailIsValid = false;
+      setEmailValidityString(emailErrorMessage);
+      setEmailIsValid(false);
     } else {
       setEmailValidityString("");
-      emailIsValid = true;
+      setEmailIsValid(true);
     }
     setEntriesValid(emailIsValid && passwordIsValid);
-
-    // console.log("email: ", email, "password: ", password);
-    // console.log("passwordValidityString: ", passwordValidityString);
   };
-  // console.log("passwordValidityString: ", passwordValidityString);
 
   return (
     <div className="login-form">
       <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          onChange={onEmailChange}
-          placeholder={
-            emailValidityString === "" ? "email *" : emailValidityString
-          }
-        />
+        <div className={emailIsValid ? "" : "field-error"}>
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={onEmailChange}
+            placeholder={
+              emailValidityString === "" ? "email *" : emailValidityString
+            }
+          />
+        </div>
         <PasswordField
           onPasswordChange={onPasswordChange}
           password={password}
@@ -63,6 +66,7 @@ const Login = () => {
               ? "password *"
               : passwordValidityString
           }
+          passwordIsValid={passwordIsValid}
         />
 
         <button type="submit">Login</button>

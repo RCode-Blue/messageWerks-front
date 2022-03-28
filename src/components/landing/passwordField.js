@@ -12,7 +12,12 @@ const PasswordField = (props) => {
   console.log("props: ", props);
 
   return (
-    <div className="password-field">
+    // <div className="password-field">
+    <div
+      className={
+        props.passwordIsValid ? "password-field" : "password-field field-error"
+      }
+    >
       <input
         type={fieldType}
         placeholder={props.placeholder}

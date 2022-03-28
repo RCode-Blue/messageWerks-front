@@ -1,0 +1,29 @@
+.field-error {
+  ::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    @include fieldError;
+  }
+  :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    @include fieldError;
+    opacity: 1;
+  }
+  ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    @include fieldError;
+    opacity: 1;
+  }
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    @include fieldError;
+  }
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    @include fieldError;
+  }
+
+  ::placeholder {
+    /* Most modern browsers support this now. */
+    @include fieldError;
+  }
+}

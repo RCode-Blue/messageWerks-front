@@ -3,6 +3,9 @@
 @import "./base/vendors";
 @import "./base/base";
 
+// Mixins
+@import "./mixins/forms";
+
 // Base
 @import "./components/app";
 
@@ -14,4 +17,5 @@
 
 // Content
 @import "./shared/content";
+@import "./shared/forms";
 @import "./components/landing";
