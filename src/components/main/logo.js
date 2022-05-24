@@ -11,18 +11,20 @@ const Logo = () => {
   // logo.src = logo_admin;
 
   return (
-    <div className="logo">
-      <div className="logo__text">
-        <Link to="/" className="styled-link logo-hover">
-          messageWerks
-        </Link>
-      </div>
-      <div className="logo__img">
-        <Link to="/" className="styled-link">
-          <img src={logo.src} alt="messageWerks Logo" />
-        </Link>
-      </div>
-    </div>
+    <header>
+      <nav className="logo">
+        <div className="logo__text">
+          <Link to="/" className="styled-link logo-hover">
+            messageWerks
+          </Link>
+        </div>
+        <div className="logo__img">
+          <Link to="/" className="styled-link">
+            <img src={logo.src} alt="messageWerks Logo" />
+          </Link>
+        </div>
+      </nav>
+    </header>
   );
 };
 
