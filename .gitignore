@@ -56,7 +56,7 @@ typings/
 
 # build files
 dist
-# build
+build
 
 # gatsby files
 .cache/
