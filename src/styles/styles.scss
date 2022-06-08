@@ -2,12 +2,20 @@
 @import "./base/variables";
 @import "./base/vendors";
 @import "./base/base";
+@import "./mixins/forms";
 
 // Base
 @import "./components/app";
 
+// Content
+@import "./shared/content";
+@import "./components/landing";
+
 // Fonts
 @import "./externals/michegar.scss";
+
+// Forms
+@import "./shared/forms";
 
 // Headers
 @import "./shared/logo";
@@ -15,6 +23,3 @@
 // Landing
 @import "./components/login";
 
-// Content
-@import "./shared/content";
-@import "./components/landing";

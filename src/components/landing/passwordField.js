@@ -9,10 +9,7 @@ const PasswordField = (props) => {
     setFieldType(newFieldType);
   };
 
-  console.log("props: ", props);
-
   return (
-    // <div className="password-field">
     <div
       className={
         props.passwordIsValid ? "password-field" : "password-field field-error"

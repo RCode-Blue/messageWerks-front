@@ -18,6 +18,10 @@ var config = {
     static: {
       publicPath: "/",
     },
+    client: {
+      logging: "warn",
+    },
+    server: "http",
     port: 3000,
   },
   module: {
@@ -36,8 +40,12 @@ var config = {
         test: /\.s[ac]ss$/i,
       },
       {
+        use: ["source-map-loader"],
+        test: /\.js$/,
+        enforce: "pre",
+      },
+      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-
         type: "asset/resource",
       },
     ],
