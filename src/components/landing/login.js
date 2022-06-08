@@ -100,12 +100,15 @@ const Login = () => {
   };
 
   const onEmailChange = (e) => {
+    const validity = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      e.target.value
+    );
+    // console.log("email validity: ", validity);
+
     emailStateDispatch({
       type: "EMAIL_ADDRESS_INPUT",
       value: e.target.value,
-      isValid: () => {
-        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value);
-      },
+      isValid: validity,
     });
   };
 
