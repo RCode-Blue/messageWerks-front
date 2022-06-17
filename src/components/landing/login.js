@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import PasswordField from "./passwordField";
 import appSettings from "../../config/appSettings.json";
+
+import AuthContext from "../../contexts/authContext";
 
 const emailStateReducer = (state, action) => {
   if (action.type === "EMAIL_ADDRESS_INPUT") {
@@ -22,13 +24,19 @@ const Login = () => {
   // const [emailIsValid, setEmailIsValid] = useState(false);
   const [passwordValidityString, setPasswordValidityString] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
+
+  // console.log("useContext: ", useContext(AuthContext));
+  console.log("isLoggedIn: ", isLoggedIn);
 
   const [emailState, emailStateDispatch] = useReducer(emailStateReducer, {
     value: "",
     isValid: false,
   });
+
+  // console.log("isLoggedIn: ", isLoggedIn);
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn")) {
@@ -91,9 +99,14 @@ const Login = () => {
           }
         })
         .then(() => {
-          // setEmail("");
+          emailStateDispatch({
+            type: "EMAIL_ADDRESS_INPUT",
+            value: "",
+            isValid: false,
+          });
           setPassword("");
-        });
+        })
+        .then(setIsLoggedIn(true));
     } catch (err) {
       setLoginIsValid(false);
     }
@@ -103,7 +116,6 @@ const Login = () => {
     const validity = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       e.target.value
     );
-    // console.log("email validity: ", validity);
 
     emailStateDispatch({
       type: "EMAIL_ADDRESS_INPUT",

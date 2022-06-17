@@ -1,11 +1,18 @@
-"use strict";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
+// import AuthContext from "../../contexts/authContext";
+
 const Landing = () => {
+  // const isLoggedInCtx = useContext(IsLoggedInContext);
+  // console.log(isLoggedInCtx.isLoggedIn);
+  // const ctx = useContext(AuthContext);
+
+  // console.log(ctx);
+
   return (
     <main className="landing-wrapper">
       <div className="landing-content landing-content__wrap">
