@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
-import PasswordField from "./passwordField";
+import { useNavigate } from "react-router-dom";
+import PasswordField from "./PasswordField";
 import appSettings from "../../config/appSettings.json";
 
-import AuthContext from "../../contexts/authContext";
+import UserContext from "../../contexts/UserContext";
 
 const emailStateReducer = (state, action) => {
   if (action.type === "EMAIL_ADDRESS_INPUT") {
@@ -12,31 +13,22 @@ const emailStateReducer = (state, action) => {
 };
 
 const Login = () => {
+  let navigate = useNavigate();
+
   const adminThreshold = appSettings.roles.adminThreshold;
-  const emailErrorMessage = "error: invalid email address";
   const passwordErrorMessage = "error: password is invalid";
 
-  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [token, setToken] = useState(null);
   const [loginIsValid, setLoginIsValid] = useState(true);
-  const [emailValidityString, setEmailValidityString] = useState("");
-  // const [emailIsValid, setEmailIsValid] = useState(false);
   const [passwordValidityString, setPasswordValidityString] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  const [isAdmin, setIsAdmin] = useState(false);
 
-  // console.log("useContext: ", useContext(AuthContext));
-  console.log("isLoggedIn: ", isLoggedIn);
+  const { user, setUser } = useContext(UserContext);
 
   const [emailState, emailStateDispatch] = useReducer(emailStateReducer, {
     value: "",
     isValid: false,
   });
-
-  // console.log("isLoggedIn: ", isLoggedIn);
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn")) {
@@ -48,7 +40,6 @@ const Login = () => {
   }, []);
 
   const checkLoginCallbackValid = (result) => {
-    // console.log("Result: ", result);
     if (!result.data) {
       return false;
     }
@@ -62,8 +53,6 @@ const Login = () => {
   const submitLogin = (loginCredentials) => {
     const apiVersion = appSettings.backend.api.version;
     const path = "/auth/login";
-    let loginResult;
-
     const backendUrl = `${process.env.BACKEND_PROTOCOL}${process.env.BACKEND_URL}:${process.env.BACKEND_PORT}/v${apiVersion}${path}`;
 
     let init = {
@@ -78,8 +67,8 @@ const Login = () => {
     try {
       fetch(backendUrl, init)
         .then((result) => result.json())
-        .then((result) => (loginResult = result))
-        .then(() => {
+        .then((result) => {
+          let loginResult = result;
           if (
             loginResult.status !== 200 ||
             !checkLoginCallbackValid(loginResult)
@@ -88,25 +77,29 @@ const Login = () => {
           }
           setLoginIsValid(true);
           const { role, token, uuid } = loginResult.data;
+          let userIsAdmin = parseInt(role) >= adminThreshold ? true : false;
+
           localStorage.setItem("role", role);
           localStorage.setItem("token", token.value);
           localStorage.setItem("uuid", uuid);
           localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem("isAdmin", userIsAdmin);
+
+          setUser({
+            isLoggedIn: true,
+            isAdmin: userIsAdmin,
+          });
+        })
+        .then(() => {
+          navigate("/profile");
         })
         .then(() => {
           if (parseInt(localStorage.getItem("role")) >= adminThreshold) {
-            setIsAdmin(true);
+            setUser({ isLoggedIn: true, isAdmin: true });
+          } else {
+            setUser({ isLoggedIn: true, isAdmin: false });
           }
-        })
-        .then(() => {
-          emailStateDispatch({
-            type: "EMAIL_ADDRESS_INPUT",
-            value: "",
-            isValid: false,
-          });
-          setPassword("");
-        })
-        .then(setIsLoggedIn(true));
+        });
     } catch (err) {
       setLoginIsValid(false);
     }
@@ -156,9 +149,7 @@ const Login = () => {
             name="email"
             value={emailState.value}
             onChange={onEmailChange}
-            placeholder={
-              emailValidityString === "" ? "email *" : emailValidityString
-            }
+            placeholder="email *"
           />
         </div>
         <PasswordField

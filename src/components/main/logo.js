@@ -1,20 +1,28 @@
 "use strict";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
+import UserContext from "../../contexts/UserContext";
+
 import logo_default from "../../assets/images/rocket_beige.png";
-import logo_admin from "../../assets/images/rocket_gold.png";
+import logo_admin from "../../assets/images/rocket_peach.png";
 
 const Logo = () => {
+  const { user, setUser } = useContext(UserContext);
+
   const logo = new Image();
-  logo.src = logo_default;
-  // logo.src = logo_admin;
+  logo.src = user.isAdmin ? logo_admin : logo_default;
 
   return (
     <header>
       <nav className="logo">
         <div className="logo__text">
-          <Link to="/" className="styled-link logo-hover">
+          <Link
+            to="/"
+            className={`logo-hover ${
+              user.isAdmin ? "styled-link-admin" : "styled-link"
+            }`}
+          >
             messageWerks
           </Link>
         </div>

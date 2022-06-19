@@ -11,19 +11,22 @@ var config = {
     vendor: VENDOR_LIBS,
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
     filename: "[name].[fullhash]-[id].js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   devServer: {
-    static: {
-      publicPath: "/",
-    },
+    server: "http",
+    port: 3000,
     client: {
       logging: "warn",
     },
-    server: "http",
-    port: 3000,
+    historyApiFallback: true,
+    static: {
+      publicPath: "/",
+    },
   },
+  devtool: "source-map",
   module: {
     rules: [
       {

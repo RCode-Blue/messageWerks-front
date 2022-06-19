@@ -16,6 +16,19 @@
   }
 }
 
+.styled-link-admin {
+  text-decoration: none;
+  color: $colour-orange-3;
+  &:hover {
+    color: $colour-brown-3;
+    cursor: default;
+    font-style: italic;
+  }
+  &:visited{
+    color: $colour-orange-3;
+  }
+}
+
 .logo-hover {
   &:hover {
     cursor: default;

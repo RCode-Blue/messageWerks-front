@@ -1,30 +1,34 @@
-import React, { StrictMode, useContext, useState } from "react";
-// import IsLoggedInContext  from "../contexts/authContext";
-// import ReactDOM from "react-dom";
+import React, { StrictMode, useState } from "react";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import AuthContext from "../contexts/authContext";
+import UserContext from "../contexts/UserContext";
 
-import Logo from "./main/logo";
-import Landing from "./landing/landing";
-import Login from "./landing/login";
+import Logo from "./Main/Logo";
+import Landing from "./Landing/Landing";
+import Login from "./Landing/Login";
+import Profile from "./Profile/Profile";
 
 import "../styles/styles.scss";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(
+    localStorage.getItem("isLoggedIn")
+      ? { isLoggedIn: true, role: localStorage.getItem("role") }
+      : { isLoggedIn: false, role: null }
+  );
 
   return (
     <div className="App app-wrapper">
       <StrictMode>
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+        <UserContext.Provider value={{ user, setUser }}>
           <Logo />
           <Routes>
             <Route path="/" element={<Landing />}></Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />}></Route>
           </Routes>
-        </AuthContext.Provider>
+        </UserContext.Provider>
       </StrictMode>
     </div>
   );
