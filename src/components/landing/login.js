@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import PasswordField from "./PasswordField";
 import appSettings from "../../config/appSettings.json";
+import { getBackendUrl } from "../../helpers/routeHelpers";
 
 import UserContext from "../../contexts/UserContext";
 
@@ -51,11 +52,9 @@ const Login = () => {
   };
 
   const submitLogin = (loginCredentials) => {
-    const apiVersion = appSettings.backend.api.version;
-    const path = "/auth/login";
-    const backendUrl = `${process.env.BACKEND_PROTOCOL}${process.env.BACKEND_URL}:${process.env.BACKEND_PORT}/v${apiVersion}${path}`;
+    const backendUrl = getBackendUrl("/auth/login");
 
-    let init = {
+    let options = {
       method: "POST",
       mode: "cors",
       headers: {
@@ -65,7 +64,7 @@ const Login = () => {
       redirect: "follow",
     };
     try {
-      fetch(backendUrl, init)
+      fetch(backendUrl, options)
         .then((result) => result.json())
         .then((result) => {
           let loginResult = result;
@@ -141,7 +140,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-form">
+    <main className="login-form">
       <form onSubmit={handleFormSubmit}>
         <div className={emailState.isValid ? "" : "field-error"}>
           <input
@@ -170,7 +169,7 @@ const Login = () => {
           Login
         </button>
       </form>
-    </div>
+    </main>
   );
 };
 

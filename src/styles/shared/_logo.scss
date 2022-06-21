@@ -7,16 +7,35 @@
   flex-wrap: wrap-reverse;
   justify-content: center;
 
+ 
+  
+
   &__text {
     padding: 0 1rem;
     font-family: $font-fam-logo;
-    font-size: 10rem;
+    &__default{
+        font-size: 10rem;
+      }
+      &__isloggedin{
+        font-size: 6rem;
+      }
   }
+  
+ 
   &__img {
     padding: 0 1rem;
     img {
       height: auto;
-      width: 10rem;
+    }
+    &__default{
+      img{
+       width: 10rem;
+      }
+    }
+    &__isloggedin{
+      img{
+        width: 6rem;
+       }
     }
   }
 }

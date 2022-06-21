@@ -9,6 +9,8 @@ import logo_admin from "../../assets/images/rocket_peach.png";
 
 const Logo = () => {
   const { user, setUser } = useContext(UserContext);
+  // console.log("isLoggedIn: ", user);
+  // console.log("-------");
 
   const logo = new Image();
   logo.src = user.isAdmin ? logo_admin : logo_default;
@@ -16,7 +18,11 @@ const Logo = () => {
   return (
     <header>
       <nav className="logo">
-        <div className="logo__text">
+        <div
+          className={`logo__text ${
+            user.isLoggedIn ? "logo__text__isloggedin" : "logo__text__default"
+          }`}
+        >
           <Link
             to="/"
             className={`logo-hover ${
@@ -26,7 +32,11 @@ const Logo = () => {
             messageWerks
           </Link>
         </div>
-        <div className="logo__img">
+        <div
+          className={`logo__img ${
+            user.isLoggedIn ? "logo__img__isloggedin" : "logo__img__default"
+          }`}
+        >
           <Link to="/" className="styled-link">
             <img src={logo.src} alt="messageWerks Logo" />
           </Link>

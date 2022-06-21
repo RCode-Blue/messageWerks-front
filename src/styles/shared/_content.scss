@@ -36,5 +36,29 @@
   }
 }
 
+/* #endregion */
+
+// Components
+/* #region */
+.styled-component {
+  
+
+  &:hover {
+    color: $colour-brown-3;
+    cursor: default;
+    font-style: italic;
+  }
+}
+
+.styled-component-default {
+  text-decoration: none;
+  color: $link-colour;
+}
+
+.styled-component-active {
+  color: $colour-brown-3;
+  cursor: default;
+  font-style: italic;
+}
 
 /* #endregion */

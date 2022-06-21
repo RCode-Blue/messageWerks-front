@@ -1,0 +1,27 @@
+.profile-wrapper{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5vw;
+  font-size: $font-size-subheading;
+}
+
+.profile-header-wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.profile-header{
+  &__name{
+
+  }
+  &__logout{
+    display: flex;
+    flex-direction: row;
+    div{
+      padding: 1rem;
+    }
+  }
+  
+}

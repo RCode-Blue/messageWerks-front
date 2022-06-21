@@ -9,7 +9,9 @@
 
 // Content
 @import "./shared/content";
-@import "./components/landing";
+@import "./shared/page";
+@import "./components/profile";
+@import "./components/business";
 
 // Fonts
 @import "./externals/michegar.scss";

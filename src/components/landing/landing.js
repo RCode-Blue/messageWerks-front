@@ -6,22 +6,22 @@ import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Landing = () => {
   return (
-    <main className="landing-wrapper">
-      <div className="landing-content landing-content__wrap">
-        <div className="landing-content__main">
+    <main className="page-wrapper">
+      <div className="page-content page-content__wrap">
+        <section className="page-content__main">
           <Link to="/login" className="styled-link">
             Login
           </Link>
-        </div>
-        <div className="landing-content__general">
+        </section>
+        <section className="page-content__general">
           <div className="styled-link">Demo</div>
           <div className="styled-link">Signup</div>
-        </div>
-        <div className="landing-content__bottom styled-link">
+        </section>
+        <section className="page-content__bottom styled-link">
           <Link to="/login" className="styled-link">
             <FontAwesomeIcon icon={faArrowRightToBracket} />
           </Link>
-        </div>
+        </section>
       </div>
     </main>
   );
