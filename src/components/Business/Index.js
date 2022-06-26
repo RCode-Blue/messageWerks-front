@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import UserContext from "../../contexts/UserContext";
 
+import BusinessDetails from "./BusinessDetails";
+
 const Business = (props) => {
   const businessDetails = props.props;
   const {
@@ -29,15 +31,36 @@ const Business = (props) => {
     settings: false,
   });
 
+  const setActiveTab = (tabName) => {
+    let scratchState = { ...showDetails };
+  };
+
   const renderBusinessDropdown = () => {
     if (expandBusiness) {
       return (
         <menu className="business-menu">
           <ul>
-            <li className="styled-component">Business</li>
-            <li className="styled-component">Emails</li>
-            <li className="styled-component">Assets</li>
-            <li className="styled-component">Settings</li>
+            <li className="styled-element" onClick={() => console.log("click")}>
+              Business
+            </li>
+            <li
+              className="styled-element"
+              onClick={() => setActiveTab("emails")}
+            >
+              Emails
+            </li>
+            <li
+              className="styled-element"
+              onClick={() => setActiveTab("assets")}
+            >
+              Assets
+            </li>
+            <li
+              className="styled-element"
+              onClick={() => setActiveTab("settings")}
+            >
+              Settings
+            </li>
           </ul>
         </menu>
       );
@@ -45,17 +68,11 @@ const Business = (props) => {
     return <div>No display</div>;
   };
 
-  // useEffect(() => {
-  //   console.log("expandBusiness: ", expandBusiness);
-  // });
-
   return (
     <Fragment>
       <div
-        className={`styled-component business-title ${
-          expandBusiness
-            ? "styled-component-active"
-            : "styled-component-default"
+        className={`styled-element business-title ${
+          expandBusiness ? "styled-element-active" : "styled-element-default"
         }`}
         onClick={() => {
           setexpandBusiness(!expandBusiness);

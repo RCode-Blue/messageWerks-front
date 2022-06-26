@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PasswordField from "./PasswordField";
 import appSettings from "../../config/appSettings.json";
 import { getBackendUrl } from "../../helpers/routeHelpers";
+import jwt_decode from "jwt-decode";
 
 import UserContext from "../../contexts/UserContext";
 
@@ -44,10 +45,6 @@ const Login = () => {
     if (!result.data) {
       return false;
     }
-    const { data } = result;
-    if (!data.project_id || !data.role || !data.token || !data.uuid) {
-      return false;
-    }
     return true;
   };
 
@@ -67,19 +64,18 @@ const Login = () => {
       fetch(backendUrl, options)
         .then((result) => result.json())
         .then((result) => {
-          let loginResult = result;
-          if (
-            loginResult.status !== 200 ||
-            !checkLoginCallbackValid(loginResult)
-          ) {
+          const accessToken = result.data;
+          if (result.status !== 200 || !checkLoginCallbackValid(result)) {
             return setLoginIsValid(false);
           }
           setLoginIsValid(true);
-          const { role, token, uuid } = loginResult.data;
+          const currentAccessToken = jwt_decode(result.data);
+          const { role, uuid, expiresIn } = currentAccessToken;
           let userIsAdmin = parseInt(role) >= adminThreshold ? true : false;
 
           localStorage.setItem("role", role);
-          localStorage.setItem("token", token.value);
+          localStorage.setItem("token", result.data);
+          localStorage.setItem("expiresIn", expiresIn);
           localStorage.setItem("uuid", uuid);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("isAdmin", userIsAdmin);

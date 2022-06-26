@@ -40,9 +40,7 @@
 
 // Components
 /* #region */
-.styled-component {
-  
-
+.styled-element {
   &:hover {
     color: $colour-brown-3;
     cursor: default;
@@ -50,12 +48,12 @@
   }
 }
 
-.styled-component-default {
+.styled-element-default {
   text-decoration: none;
   color: $link-colour;
 }
 
-.styled-component-active {
+.styled-element-active {
   color: $colour-brown-3;
   cursor: default;
   font-style: italic;
