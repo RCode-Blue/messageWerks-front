@@ -4,8 +4,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
+import { UserContext } from "../../contexts/UserContext";
+
 const Landing = () => {
   // console.log("-----");
+  // const context = useContext(UserContext);
+  // console.log(context.user);
+
+  // console.log("environment: ", process.env.ENVIRONMENT);
   // console.log("isLoggedIn: ", localStorage.getItem("isLoggedIn"));
   return (
     <main className="page-wrapper">

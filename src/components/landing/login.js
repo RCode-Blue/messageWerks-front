@@ -5,7 +5,7 @@ import appSettings from "../../config/appSettings.json";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import jwt_decode from "jwt-decode";
 
-import UserContext from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 
 const emailStateReducer = (state, action) => {
   if (action.type === "EMAIL_ADDRESS_INPUT") {
@@ -25,7 +25,7 @@ const Login = () => {
   const [passwordValidityString, setPasswordValidityString] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(false);
 
-  const { user, setUser } = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   const [emailState, emailStateDispatch] = useReducer(emailStateReducer, {
     value: "",
@@ -70,6 +70,7 @@ const Login = () => {
           }
           setLoginIsValid(true);
           const currentAccessToken = jwt_decode(result.data);
+          console.log(currentAccessToken);
           const { role, uuid, expiresIn } = currentAccessToken;
           let userIsAdmin = parseInt(role) >= adminThreshold ? true : false;
 
@@ -80,7 +81,8 @@ const Login = () => {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("isAdmin", userIsAdmin);
 
-          setUser({
+          userContext.setUser({
+            ...userContext.user,
             isLoggedIn: true,
             isAdmin: userIsAdmin,
           });
@@ -90,9 +92,9 @@ const Login = () => {
         })
         .then(() => {
           if (parseInt(localStorage.getItem("role")) >= adminThreshold) {
-            setUser({ isLoggedIn: true, isAdmin: true });
+            userContext.setUser({ isLoggedIn: true, isAdmin: true });
           } else {
-            setUser({ isLoggedIn: true, isAdmin: false });
+            userContext.setUser({ isLoggedIn: true, isAdmin: false });
           }
         });
     } catch (err) {

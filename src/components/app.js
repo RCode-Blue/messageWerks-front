@@ -2,7 +2,8 @@ import React, { StrictMode, useState } from "react";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import UserContext from "../contexts/UserContext";
+// import UserContext from "../contexts/UserContext";
+import UserProvider from "../contexts/UserContext";
 
 import Logo from "./Main/Logo";
 import Landing from "./Landing/Landing";
@@ -12,23 +13,23 @@ import Profile from "./Profile/Profile";
 import "../styles/styles.scss";
 
 function App() {
-  const [user, setUser] = useState(
-    localStorage.getItem("isLoggedIn")
-      ? { isLoggedIn: true, role: localStorage.getItem("role") }
-      : { isLoggedIn: false, role: null }
-  );
+  // const [user, setUser] = useState(
+  //   localStorage.getItem("isLoggedIn")
+  //     ? { isLoggedIn: true, role: localStorage.getItem("role") }
+  //     : { isLoggedIn: false, role: null }
+  // );
 
   return (
     <div className="App app-wrapper">
       <StrictMode>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserProvider>
           <Logo />
           <Routes>
             <Route path="/" element={<Landing />}></Route>
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />}></Route>
           </Routes>
-        </UserContext.Provider>
+        </UserProvider>
       </StrictMode>
     </div>
   );

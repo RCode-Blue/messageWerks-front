@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 import Footer from "../Main/Footer";
-import UserContext from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkIsAdmin } from "../../helpers/aclHelpers";
 import Business from "../Business/Index";
@@ -12,7 +12,8 @@ import ProfileHeader from "./ProfileHeader";
 
 const Profile = () => {
   const [businesses, setBusinesses] = useState([]);
-  const { user, setUser } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   const fetchUserProfile = (token) => {
     const backendUrl = getBackendUrl("/users/uuid");
@@ -29,12 +30,12 @@ const Profile = () => {
         .then((result) => result.json())
         .then((result) => {
           if (result.status != 200) {
-            setUser({ isLoggedIn: false });
+            userContext.setUser({ isLoggedIn: false });
             return;
           }
           let userProfile = result.data;
 
-          setUser({
+          userContext.setUser({
             isLoggedIn: true,
             firstName: userProfile.first_name,
             lastName: userProfile.last_name,
@@ -44,7 +45,7 @@ const Profile = () => {
           setBusinesses(userProfile.businesses);
         });
     } catch (err) {
-      setUser({ isLoggedIn: false });
+      userContext.setUser({ isLoggedIn: false });
     }
   };
 
@@ -52,7 +53,7 @@ const Profile = () => {
     if (localStorage.getItem("token")) {
       fetchUserProfile(localStorage.getItem("token"));
     } else {
-      setUser({ isLoggedIn: false });
+      userContext.setUser({ isLoggedIn: false });
     }
   }, []);
 
@@ -73,10 +74,12 @@ const Profile = () => {
     return <div></div>;
   };
 
+  // console.log(userContext);
+
   return (
     <Fragment>
       <section className="profile-wrapper">
-        <ProfileHeader props={user} />
+        <ProfileHeader props={userContext.user} />
         {renderBusinesses()}
       </section>
       <Footer />

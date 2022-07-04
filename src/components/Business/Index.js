@@ -5,7 +5,7 @@ import React, {
   useEffect,
   Fragment,
 } from "react";
-import UserContext from "../../contexts/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 
 import BusinessDetails from "./BusinessDetails";
 
@@ -22,7 +22,7 @@ const Business = (props) => {
     uuid,
   } = businessDetails;
 
-  const { user, setUser } = useContext(UserContext);
+  const userContext = useContext(UserContext);
   const [expandBusiness, setexpandBusiness] = useState(false);
   const [showDetails, setShowDetails] = useState({
     business: false,
