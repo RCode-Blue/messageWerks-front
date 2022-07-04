@@ -9,8 +9,6 @@ import logo_admin from "../../assets/images/rocket_peach.png";
 
 const Logo = () => {
   const { user, setUser } = useContext(UserContext);
-  // console.log("isLoggedIn: ", user);
-  // console.log("-------");
 
   const logo = new Image();
   logo.src = user.isAdmin ? logo_admin : logo_default;

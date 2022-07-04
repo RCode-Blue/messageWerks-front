@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
+import Footer from "../Main/Footer";
 import UserContext from "../../contexts/UserContext";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkIsAdmin } from "../../helpers/aclHelpers";
@@ -78,11 +79,7 @@ const Profile = () => {
         <ProfileHeader props={user} />
         {renderBusinesses()}
       </section>
-      <div className="page-content__bottom styled-link">
-        <Link to="/" className="styled-link">
-          <FontAwesomeIcon icon={faArrowRightFromBracket} />
-        </Link>
-      </div>
+      <Footer />
     </Fragment>
   );
 };

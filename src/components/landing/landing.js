@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 const Landing = () => {
+  // console.log("-----");
+  // console.log("isLoggedIn: ", localStorage.getItem("isLoggedIn"));
   return (
     <main className="page-wrapper">
       <div className="page-content page-content__wrap">
