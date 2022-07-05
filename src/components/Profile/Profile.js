@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 import Footer from "../Main/Footer";
+import AuthButton from "../Main/AuthButton";
 import { UserContext } from "../../contexts/UserContext";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkIsAdmin } from "../../helpers/aclHelpers";
@@ -82,7 +83,7 @@ const Profile = () => {
         <ProfileHeader props={userContext.user} />
         {renderBusinesses()}
       </section>
-      <Footer />
+      <AuthButton />
     </Fragment>
   );
 };

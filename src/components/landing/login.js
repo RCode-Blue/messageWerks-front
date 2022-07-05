@@ -4,6 +4,7 @@ import PasswordField from "./PasswordField";
 import appSettings from "../../config/appSettings.json";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import jwt_decode from "jwt-decode";
+import AuthButton from "../Main/AuthButton";
 
 import { UserContext } from "../../contexts/UserContext";
 
@@ -21,7 +22,7 @@ const Login = () => {
   const passwordErrorMessage = "error: password is invalid";
 
   const [password, setPassword] = useState("");
-  const [loginIsValid, setLoginIsValid] = useState(true);
+  // const [loginIsValid, setLoginIsValid] = useState(true);
   const [passwordValidityString, setPasswordValidityString] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(false);
 
@@ -64,20 +65,26 @@ const Login = () => {
       fetch(backendUrl, options)
         .then((result) => result.json())
         .then((result) => {
-          const accessToken = result.data;
+          // const accessToken = result.data;
           if (result.status !== 200 || !checkLoginCallbackValid(result)) {
-            return setLoginIsValid(false);
+            // return setLoginIsValid(false);
+            return userContext.setUser({
+              ...userContext.user,
+              isLoggedIn: false,
+            });
           }
-          setLoginIsValid(true);
+          // setLoginIsValid(true);
+          userContext.setUser({
+            ...userContext.user,
+            isLoggedIn: true,
+          });
           const currentAccessToken = jwt_decode(result.data);
-          console.log(currentAccessToken);
           const { role, uuid, expiresIn } = currentAccessToken;
           let userIsAdmin = parseInt(role) >= adminThreshold ? true : false;
 
           localStorage.setItem("role", role);
           localStorage.setItem("token", result.data);
           localStorage.setItem("expiresIn", expiresIn);
-          localStorage.setItem("uuid", uuid);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("isAdmin", userIsAdmin);
 
@@ -92,13 +99,25 @@ const Login = () => {
         })
         .then(() => {
           if (parseInt(localStorage.getItem("role")) >= adminThreshold) {
-            userContext.setUser({ isLoggedIn: true, isAdmin: true });
+            userContext.setUser({
+              ...userContext.user,
+              isLoggedIn: true,
+              isAdmin: true,
+            });
           } else {
-            userContext.setUser({ isLoggedIn: true, isAdmin: false });
+            userContext.setUser({
+              ...userContext.user,
+              isLoggedIn: true,
+              isAdmin: false,
+            });
           }
         });
     } catch (err) {
-      setLoginIsValid(false);
+      // setLoginIsValid(false);
+      userContext.setUser({
+        ...userContext.user,
+        isLoggedIn: false,
+      });
     }
   };
 

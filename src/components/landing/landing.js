@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
-import { UserContext } from "../../contexts/UserContext";
+import AuthButton from "../Main/AuthButton";
 
 const Landing = () => {
   // console.log("-----");
@@ -26,9 +26,7 @@ const Landing = () => {
           <div className="styled-link">Signup</div>
         </section>
         <section className="page-content__bottom styled-link">
-          <Link to="/login" className="styled-link">
-            <FontAwesomeIcon icon={faArrowRightToBracket} />
-          </Link>
+          <AuthButton />
         </section>
       </div>
     </main>

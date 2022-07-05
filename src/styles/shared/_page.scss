@@ -27,9 +27,25 @@
   }
   &__bottom {
     padding: 5rem;
+    text-align: center;
     svg {
       height: auto;
       width: 3rem;
+    }
+  }
+
+  &__auth-button {
+    border: none;
+    outline: none;
+    background-color:transparent;
+    svg {
+      height: auto;
+      
+    }
+    &__footer{
+      svg{
+        width: 3rem;
+      }
     }
   }
 }

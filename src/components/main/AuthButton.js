@@ -4,10 +4,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
-const Footer = () => {
+const AuthButton = () => {
   const userContext = useContext(UserContext);
   let navigate = useNavigate();
+
   const handleLogoutClick = () => {
     localStorage.clear();
     userContext.setUser({
@@ -18,8 +20,13 @@ const Footer = () => {
     navigate("/");
   };
 
-  return (
-    <div className="page-content__bottom">
+  const handleLoginClick = () => {
+    let navigate = useNavigate();
+    navigate()("/login");
+  };
+
+  const renderLogoutButton = () => {
+    return (
       <button
         className="page-content__auth-button styled-link"
         type="button"
@@ -27,8 +34,30 @@ const Footer = () => {
       >
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
+    );
+  };
+
+  const renderLoginButton = () => {
+    return (
+      <button
+        className="page-content__auth-button styled-link"
+        type="button"
+        onClick={handleLoginClick}
+      >
+        <FontAwesomeIcon icon={faArrowRightToBracket} />
+      </button>
+    );
+  };
+
+  return (
+    <div className="page-content__bottom">
+      {userContext.user.isLoggedIn ? (
+        <div>{renderLogoutButton()}</div>
+      ) : (
+        <div>{renderLoginButton()}</div>
+      )}
     </div>
   );
 };
 
-export default Footer;
+export default AuthButton;
