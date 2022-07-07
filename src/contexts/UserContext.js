@@ -28,7 +28,10 @@ const userInitialValues = {
 };
 
 const getInitialUserState = () => {
-  if (!localStorage.getItem("token")) {
+  if (
+    !localStorage.getItem("token") ||
+    localStorage.getItem("token") === "undefined"
+  ) {
     return userInitialValues;
   }
   return decodeToken(localStorage.getItem("token"));

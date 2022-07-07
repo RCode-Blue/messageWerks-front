@@ -19,7 +19,7 @@ const Footer = () => {
   };
 
   return (
-    <div className="page-content__bottom">
+    <div className="page-content__authsection">
       <button
         className="page-content__auth-button styled-link"
         type="button"

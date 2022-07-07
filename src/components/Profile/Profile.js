@@ -1,23 +1,18 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-
-import Footer from "../Main/Footer";
-import AuthButton from "../Main/AuthButton";
 import { UserContext } from "../../contexts/UserContext";
-import { getBackendUrl } from "../../helpers/routeHelpers";
+
 import { checkIsAdmin } from "../../helpers/aclHelpers";
+import { getBackendUrl } from "../../helpers/routeHelpers";
+import AuthButton from "../Main/AuthButton";
 import Business from "../Business/Index";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ProfileHeader from "./ProfileHeader";
 
 const Profile = () => {
   const [businesses, setBusinesses] = useState([]);
-  // const { user, setUser } = useContext(UserContext);
   const userContext = useContext(UserContext);
 
   const fetchUserProfile = (token) => {
-    const backendUrl = getBackendUrl("/users/uuid");
+    const backendUrl = getBackendUrl("/users/profile");
 
     let options = {
       method: "GET",
@@ -30,28 +25,54 @@ const Profile = () => {
       fetch(backendUrl, options)
         .then((result) => result.json())
         .then((result) => {
-          if (result.status != 200) {
+          if (result.status === 401) {
             userContext.setUser({ isLoggedIn: false });
-            return;
+            localStorage.setItem("isLoggedIn", false);
+            localStorage.setItem("token", result.data.accessToken);
+            options.headers.Authorization = result.data.accessToken;
+            try {
+              fetch(backendUrl, options)
+                .then((result) => result.json())
+                .then((result) => {
+                  let userProfile = result.data;
+                  userContext.setUser({
+                    isLoggedIn: true,
+                    firstName: userProfile.first_name,
+                    lastName: userProfile.last_name,
+                    role: userProfile.role,
+                    isAdmin: checkIsAdmin(userProfile.role),
+                  });
+                  setBusinesses(userProfile.businesses);
+                });
+            } catch (error) {}
           }
-          let userProfile = result.data;
+          if (result.status === 400) {
+            // console.log("-- 400 --");
+            // console.log(result);
+          }
 
-          userContext.setUser({
-            isLoggedIn: true,
-            firstName: userProfile.first_name,
-            lastName: userProfile.last_name,
-            role: userProfile.role,
-            isAdmin: checkIsAdmin(userProfile.role),
-          });
-          setBusinesses(userProfile.businesses);
+          if (result.status === 200) {
+            let userProfile = result.data;
+            userContext.setUser({
+              isLoggedIn: true,
+              firstName: userProfile.first_name,
+              lastName: userProfile.last_name,
+              role: userProfile.role,
+              isAdmin: checkIsAdmin(userProfile.role),
+            });
+            setBusinesses(userProfile.businesses);
+          }
         });
     } catch (err) {
-      userContext.setUser({ isLoggedIn: false });
+      userContext.setUser({ isLoggedIn: false, token: null });
     }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (
+      localStorage.getItem("token") ||
+      localStorage.getItem("token") !== "undefined"
+    ) {
       fetchUserProfile(localStorage.getItem("token"));
     } else {
       userContext.setUser({ isLoggedIn: false });
@@ -72,10 +93,9 @@ const Profile = () => {
         </Fragment>
       );
     }
-    return <div></div>;
-  };
 
-  // console.log(userContext);
+    return <div>Please login again</div>;
+  };
 
   return (
     <Fragment>
@@ -83,7 +103,9 @@ const Profile = () => {
         <ProfileHeader props={userContext.user} />
         {renderBusinesses()}
       </section>
-      <AuthButton />
+      <section className="page-content__authsection styled-link">
+        <AuthButton btnClassNamePrefix="page-content" />
+      </section>
     </Fragment>
   );
 };

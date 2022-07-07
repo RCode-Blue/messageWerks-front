@@ -22,7 +22,6 @@ const Login = () => {
   const passwordErrorMessage = "error: password is invalid";
 
   const [password, setPassword] = useState("");
-  // const [loginIsValid, setLoginIsValid] = useState(true);
   const [passwordValidityString, setPasswordValidityString] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState(false);
 
@@ -65,26 +64,24 @@ const Login = () => {
       fetch(backendUrl, options)
         .then((result) => result.json())
         .then((result) => {
-          // const accessToken = result.data;
           if (result.status !== 200 || !checkLoginCallbackValid(result)) {
-            // return setLoginIsValid(false);
             return userContext.setUser({
               ...userContext.user,
               isLoggedIn: false,
             });
           }
-          // setLoginIsValid(true);
           userContext.setUser({
             ...userContext.user,
             isLoggedIn: true,
           });
           const currentAccessToken = jwt_decode(result.data);
-          const { role, uuid, expiresIn } = currentAccessToken;
+          const { role, uuid } = currentAccessToken;
           let userIsAdmin = parseInt(role) >= adminThreshold ? true : false;
 
           localStorage.setItem("role", role);
           localStorage.setItem("token", result.data);
-          localStorage.setItem("expiresIn", expiresIn);
+          localStorage.setItem("uuid", uuid);
+          // localStorage.setItem("expiresIn", expiresIn);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("isAdmin", userIsAdmin);
 
@@ -113,7 +110,6 @@ const Login = () => {
           }
         });
     } catch (err) {
-      // setLoginIsValid(false);
       userContext.setUser({
         ...userContext.user,
         isLoggedIn: false,

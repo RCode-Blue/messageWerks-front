@@ -40,7 +40,10 @@ const Business = (props) => {
       return (
         <menu className="business-menu">
           <ul>
-            <li className="styled-element" onClick={() => console.log("click")}>
+            <li
+              className="styled-element"
+              onClick={() => console.log("clicked Business")}
+            >
               Business
             </li>
             <li

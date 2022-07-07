@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
-const AuthButton = () => {
-  const userContext = useContext(UserContext);
+const AuthButton = (props) => {
+  const { btnClassNamePrefix: prefix } = props;
+
   let navigate = useNavigate();
+  const userContext = useContext(UserContext);
 
   const handleLogoutClick = () => {
     localStorage.clear();
@@ -21,14 +23,13 @@ const AuthButton = () => {
   };
 
   const handleLoginClick = () => {
-    let navigate = useNavigate();
-    navigate()("/login");
+    navigate("/login");
   };
 
   const renderLogoutButton = () => {
     return (
       <button
-        className="page-content__auth-button styled-link"
+        className={`${prefix}__auth-button styled-link`}
         type="button"
         onClick={handleLogoutClick}
       >
@@ -40,7 +41,7 @@ const AuthButton = () => {
   const renderLoginButton = () => {
     return (
       <button
-        className="page-content__auth-button styled-link"
+        className={`${prefix}__auth-button styled-link`}
         type="button"
         onClick={handleLoginClick}
       >
@@ -50,7 +51,7 @@ const AuthButton = () => {
   };
 
   return (
-    <div className="page-content__bottom">
+    <div className={`${prefix}__authsection`}>
       {userContext.user.isLoggedIn ? (
         <div>{renderLogoutButton()}</div>
       ) : (

@@ -1,12 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-
-import { Link } from "react-router-dom";
+import AuthButton from "../Main/AuthButton";
 
 const ProfileHeader = (props) => {
-  // console.log(props);
   const { firstName, lastName } = props.props;
   return (
     <header className="profile-header-wrapper">
@@ -17,9 +12,7 @@ const ProfileHeader = (props) => {
       <div className="profile-header__logout">
         <div>Logout</div>
         <div>
-          <Link to="/" className="styled-link">
-            <FontAwesomeIcon icon={faArrowRightFromBracket} />
-          </Link>
+          <AuthButton btnClassNamePrefix="profile-header" />
         </div>
       </div>
     </header>
