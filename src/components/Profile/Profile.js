@@ -3,6 +3,7 @@ import { UserContext } from "../../contexts/UserContext";
 
 import { checkIsAdmin } from "../../helpers/aclHelpers";
 import { getBackendUrl } from "../../helpers/routeHelpers";
+import AdminProfile from "../Admin/AdminProfile";
 import AuthButton from "../Main/AuthButton";
 import Business from "../Business/Index";
 import ProfileHeader from "./ProfileHeader";
@@ -101,7 +102,7 @@ const Profile = () => {
     <Fragment>
       <section className="profile-wrapper">
         <ProfileHeader props={userContext.user} />
-        {renderBusinesses()}
+        {userContext.user.isAdmin ? <AdminProfile /> : renderBusinesses()}
       </section>
       <section className="page-content__authsection styled-link">
         <AuthButton btnClassNamePrefix="page-content" />

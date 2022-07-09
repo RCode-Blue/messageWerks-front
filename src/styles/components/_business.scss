@@ -20,3 +20,41 @@
     }
   }
 }
+
+.business-details{
+  padding: 2rem;
+  font-size: $font-size-content;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  &__contents{
+    div{
+        padding: 0.2rem 0;
+      }
+  }
+  
+  &__button{
+    margin-top:1rem;
+    padding: 0.6rem;
+    border: none;
+    border-radius: $standard-border-radius;
+  }
+  &__form{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+    input, button{
+      padding: 0.5rem;
+      border:none;
+      border-radius: $standard-border-radius;
+    }
+    input{
+      margin: 0.5rem 0;
+    }
+    button{
+      margin-top: 1rem;
+    }
+  }
+}
+
+
