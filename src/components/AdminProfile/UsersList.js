@@ -1,13 +1,15 @@
 import React from "react";
 
+import UserDetails from "./UserDetails";
+
 const UsersList = (props) => {
   const { props: users } = props;
-  console.log("users: ", users);
+  // console.log("users: ", users);
   return (
     <div>
-      <div>User 1</div>
-      <div>User 2</div>
-      <div>User 3</div>
+      {users.map((user) => {
+        return <UserDetails props={user} key={user.uuid} />;
+      })}
     </div>
   );
 };
