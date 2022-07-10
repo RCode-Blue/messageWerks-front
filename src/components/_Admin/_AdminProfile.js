@@ -81,8 +81,8 @@ const AdminProfile = () => {
   };
 
   useEffect(() => {
-    fetchAllUserNames();
-    fetchAllBusinessNames();
+    // fetchAllUserNames();
+    // fetchAllBusinessNames();
   }, []);
 
   const renderAdminProfile = () => {

@@ -3,7 +3,7 @@ import { UserContext } from "../../contexts/UserContext";
 
 import { checkIsAdmin } from "../../helpers/aclHelpers";
 import { getBackendUrl } from "../../helpers/routeHelpers";
-import AdminProfile from "../Admin/AdminProfile";
+import AdminProfile from "../AdminProfile";
 import AuthButton from "../Main/AuthButton";
 import Business from "../Business/Index";
 import ProfileHeader from "./ProfileHeader";
