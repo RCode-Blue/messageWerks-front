@@ -3,12 +3,15 @@ import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { UserContext } from "../../contexts/UserContext";
 
-const UserDetails = (props) => {
+import UserDetails from "./UserDetails";
+
+const UserName = (props) => {
   // console.log(props);
   const { props: user } = props;
   const [userData, setUserData] = useState(user);
   // const [showDetails, setShowDetails] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
+  // const [showEdit, setShowEdit] = useState(false);
+  const [showUserDetails, setShowUserDetails] = useState(false);
   const userContext = useContext(UserContext);
 
   const fetchUserDetails = async () => {
@@ -60,6 +63,7 @@ const UserDetails = (props) => {
     // setUserData(...userDetails, { fetched: true });
   };
 
+  /*
   const renderBusinesses = (businesses) => {
     // console.log("businesses: ", businesses);
     if (businesses.length === 0) {
@@ -73,7 +77,6 @@ const UserDetails = (props) => {
   };
 
   const renderUserDetails = () => {
-    /*
     if (!showDetails && !showEdit) {
       return (
         <div
@@ -89,9 +92,7 @@ const UserDetails = (props) => {
         </div>
       );
     }
-    */
-
-    if (!showEdit) {
+    if (showDetails && !showEdit) {
       // console.log("userData: ", userData);
 
       return (
@@ -107,18 +108,36 @@ const UserDetails = (props) => {
         </div>
       );
     }
-    // if (showDetails && showEdit) {
-    return (
-      <div>
-        Show edit
-        <button></button>
-      </div>
-    );
-    // }
+    if (showDetails && showEdit) {
+      return (
+        <div>
+          Show edit
+          <button></button>
+        </div>
+      );
+    }
+  };
+  */
+
+  const renderUser = () => {
+    if (!showUserDetails) {
+      return (
+        <div
+          onClick={() => {
+            fetchUserDetails().then(setShowUserDetails(!showUserDetails));
+          }}
+        >
+          {user.first_name} {user.last_name}
+        </div>
+      );
+    }
+
+    return <UserDetails props={userData} />;
   };
 
-  // console.log("userData: ", userData);
-  return <div>{renderUserDetails()}</div>;
+  console.log("userData: ", userData);
+  // return <div>{renderUserDetails()}</div>;
+  return <div>{renderUser()}</div>;
 };
 
-export default UserDetails;
+export default UserName;
