@@ -1,11 +1,15 @@
 import React from "react";
 
-const BusinessesList = () => {
+import BusinessName from "./BusinessName";
+
+const BusinessesList = (props) => {
+  const { props: businesses } = props;
+  // console.log("props: ", props);
   return (
     <div>
-      <div>Business 1</div>
-      <div>Business 2</div>
-      <div>Business 3</div>
+      {businesses.map((business) => {
+        return <BusinessName props={business} key={business.uuid} />;
+      })}
     </div>
   );
 };

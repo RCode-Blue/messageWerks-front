@@ -48,7 +48,7 @@ const BusinessDetails = (props) => {
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        authorization: token,
       },
       body: JSON.stringify(formData),
     };

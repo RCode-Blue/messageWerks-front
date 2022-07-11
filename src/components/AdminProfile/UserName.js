@@ -13,7 +13,7 @@ const UserName = (props) => {
   // const [showEdit, setShowEdit] = useState(false);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userContext = useContext(UserContext);
-
+  /*
   const fetchUserDetails = async () => {
     let token, result, userDetails;
 
@@ -63,7 +63,7 @@ const UserName = (props) => {
     // setUserData(...userDetails, { fetched: true });
   };
 
-  /*
+  
   const renderBusinesses = (businesses) => {
     // console.log("businesses: ", businesses);
     if (businesses.length === 0) {
@@ -122,11 +122,7 @@ const UserName = (props) => {
   const renderUser = () => {
     if (!showUserDetails) {
       return (
-        <div
-          onClick={() => {
-            fetchUserDetails().then(setShowUserDetails(!showUserDetails));
-          }}
-        >
+        <div>
           {user.first_name} {user.last_name}
         </div>
       );
@@ -135,9 +131,16 @@ const UserName = (props) => {
     return <UserDetails props={userData} />;
   };
 
-  console.log("userData: ", userData);
-  // return <div>{renderUserDetails()}</div>;
-  return <div>{renderUser()}</div>;
+  return (
+    <div>
+      <div>
+        {showUserDetails ? <UserDetails props={userData} /> : renderUser()}
+      </div>
+      <button onClick={() => setShowUserDetails(!showUserDetails)}>
+        {showUserDetails ? "Hide" : "Show"}
+      </button>
+    </div>
+  );
 };
 
 export default UserName;

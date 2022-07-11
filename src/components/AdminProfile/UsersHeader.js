@@ -67,8 +67,6 @@ const UsersHeader = () => {
     };
   }, []);
 
-  // console.log("userList: ", userList);
-
   return (
     <div>
       <div onClick={() => setShowList(!showList)}>Users Header</div>
