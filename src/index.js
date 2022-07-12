@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
-// import AuthContext from "./contexts/authContext";
-
 import App from "./components/app";
 
 ReactDOM.render(

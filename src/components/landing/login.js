@@ -4,7 +4,6 @@ import PasswordField from "./PasswordField";
 import appSettings from "../../config/appSettings.json";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import jwt_decode from "jwt-decode";
-import AuthButton from "../Main/AuthButton";
 
 import { UserContext } from "../../contexts/UserContext";
 
@@ -78,10 +77,7 @@ const Login = () => {
           const { role, uuid } = currentAccessToken;
           let userIsAdmin = parseInt(role) >= adminThreshold ? true : false;
 
-          localStorage.setItem("role", role);
           localStorage.setItem("token", result.data);
-          localStorage.setItem("uuid", uuid);
-          // localStorage.setItem("expiresIn", expiresIn);
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("isAdmin", userIsAdmin);
 

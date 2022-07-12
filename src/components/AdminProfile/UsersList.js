@@ -4,9 +4,8 @@ import UserName from "./UserName";
 
 const UsersList = (props) => {
   const { props: users } = props;
-  // console.log("users: ", users);
   return (
-    <div>
+    <div className="section-detail-wrapper">
       {users.map((user) => {
         return <UserName props={user} key={user.uuid} />;
       })}

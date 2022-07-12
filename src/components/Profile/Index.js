@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
+import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { checkIsAdmin } from "../../helpers/aclHelpers";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import AdminProfile from "../AdminProfile";
@@ -48,8 +49,7 @@ const Profile = () => {
             } catch (error) {}
           }
           if (result.status === 400) {
-            // console.log("-- 400 --");
-            // console.log(result);
+            console.error("error 400 bad request");
           }
 
           if (result.status === 200) {
@@ -70,13 +70,11 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (
-      localStorage.getItem("token") ||
-      localStorage.getItem("token") !== "undefined"
-    ) {
-      fetchUserProfile(localStorage.getItem("token"));
-    } else {
+    let token = checkLocalToken();
+    if (!token) {
       userContext.setUser({ isLoggedIn: false });
+    } else {
+      fetchUserProfile(localStorage.getItem("token"));
     }
   }, []);
 

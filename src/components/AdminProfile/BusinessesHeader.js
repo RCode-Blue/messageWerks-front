@@ -4,6 +4,8 @@ import BusinessesList from "./BusinessesList";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { UserContext } from "../../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const BusinessesHeader = () => {
   const [showList, setShowList] = useState(false);
@@ -15,7 +17,7 @@ const BusinessesHeader = () => {
     let isMounted = true;
 
     const fetchBusinesses = async () => {
-      let token, result;
+      let token, response, result;
 
       token = checkLocalToken();
       if (!token) {
@@ -32,7 +34,7 @@ const BusinessesHeader = () => {
           queryType: "nameOnly",
         },
       };
-      let response = await fetch(backendUrl, options);
+      response = await fetch(backendUrl, options);
       result = await response.json();
 
       if (result.status === 200) {
@@ -40,12 +42,17 @@ const BusinessesHeader = () => {
       }
 
       if (result.status === 401) {
+        options.headers.authentication = result.data.accessToken;
+        response = await fetch(backendUrl, options);
+        allBusiness = (await response.json).data;
       }
 
       if (result.status === 400) {
+        userContext.setUser({ isLoggedIn: false });
       }
 
       if (result.status === 403) {
+        console.error("403 forbidden");
       }
 
       if (isMounted) {
@@ -60,10 +67,31 @@ const BusinessesHeader = () => {
   }, []);
 
   return (
-    <div>
-      <div onClick={() => setShowList(!showList)}>Businesses Header</div>
+    <section
+      className={`admin-profile-section ${
+        showList ? "admin-profile-section__active" : ""
+      }`}
+    >
+      <div className="admin-profile-section__header">
+        <h1
+          className={`styled-element ${
+            showList ? "styled-element-active" : "styled-element-default"
+          }`}
+        >
+          Businesses
+        </h1>
+
+        <div onClick={() => setShowList(!showList)}>
+          {showList ? (
+            <FontAwesomeIcon icon={faCaretUp} />
+          ) : (
+            <FontAwesomeIcon icon={faCaretDown} />
+          )}
+        </div>
+      </div>
+
       {showList ? <BusinessesList props={businessList} /> : null}
-    </div>
+    </section>
   );
 };
 

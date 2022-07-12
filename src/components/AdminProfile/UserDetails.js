@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from "react";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { UserContext } from "../../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const UserDetails = (props) => {
-  // console.log(props);
   const { props: user } = props;
   const [userData, setUserData] = useState(user);
-  // const [showDetails, setShowDetails] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const userContext = useContext(UserContext);
 
@@ -26,9 +26,15 @@ const UserDetails = (props) => {
     if (businesses.length === 0) {
       return null;
     }
-    return businesses.map((business) => {
-      return <div key={business.uuid}>{business.name}</div>;
-    });
+
+    return (
+      <div className="section-detail__show__businesses">
+        <div>Businesses:</div>
+        {businesses.map((business) => {
+          return <div key={business.uuid}>{business.name}</div>;
+        })}
+      </div>
+    );
   };
 
   const handleFormSubmit = async (e) => {
@@ -36,7 +42,6 @@ const UserDetails = (props) => {
 
     let result, token;
     const backendUrl = getBackendUrl("/users/edit");
-    // console.log("Submitting form to ", backendUrl);
     token = checkLocalToken();
     if (!token) {
       userContext.setUser({ isLoggedIn: false });
@@ -54,7 +59,6 @@ const UserDetails = (props) => {
 
     let response = await fetch(backendUrl, options);
     result = await response.json();
-    // console.log(result.data);
     const { first_name, last_name, email, uuid } = result.data;
     setUserData({
       first_name,
@@ -66,46 +70,62 @@ const UserDetails = (props) => {
   };
 
   const renderDetails = () => {
-    // console.log("details rendered");
     return (
-      <div>
-        <div>{userData.first_name}</div>
-        <div>{userData.last_name}</div>
-        <div>{userData.email}</div>
-        <div>Businesses:</div>
-        <div>
-          {userData.businesses ? renderBusinesses(userData.businesses) : null}
+      <div className="section-detail__show">
+        <div className="section-detail__show__data">
+          <div>
+            {userData.first_name} {userData.last_name}
+          </div>
+          <div>{userData.email}</div>
+
+          <div>
+            {userData.businesses ? renderBusinesses(userData.businesses) : null}
+          </div>
         </div>
-        <button onClick={() => setShowForm(true)}>Edit</button>
+        <FontAwesomeIcon
+          className="section-detail__show__icon"
+          icon={faEdit}
+          onClick={() => setShowForm(true)}
+        />
       </div>
     );
   };
 
   const renderForm = () => {
     return (
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          name="first_name"
-          placeholder="First name"
-          value={formData.first_name}
-          onChange={handleFormDataChange}
-        />
-        <input
-          type="text"
-          name="last_name"
-          placeholder="Last name"
-          value={formData.last_name}
-          onChange={handleFormDataChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          value={formData.email}
-          onChange={handleFormDataChange}
-        />
+      <form className="section-detail__form" onSubmit={handleFormSubmit}>
+        <div className="section-detail__form__entry">
+          <label htmlFor="first_name">First name:</label>
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First name"
+            value={formData.first_name}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
+        <div className="section-detail__form__entry">
+          <label htmlFor="last_name">Last name:</label>
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last name"
+            value={formData.last_name}
+            onChange={handleFormDataChange}
+          />
+        </div>
+
+        <div className="section-detail__form__entry">
+          <label htmlFor="email">email:</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="email"
+            value={formData.email}
+            onChange={handleFormDataChange}
+          />
+        </div>
         <button type="submit">Submit</button>
         <button onClick={() => setShowForm(false)}>Cancel</button>
       </form>
@@ -148,7 +168,7 @@ const UserDetails = (props) => {
       }
 
       if (result.status === 400) {
-        console.error("400 bad request");
+        userContext.setUser({ isLoggedIn: false });
       }
       if (result.status === 403) {
         console.error("403 forbidden");
@@ -166,7 +186,6 @@ const UserDetails = (props) => {
     };
   }, []);
 
-  // console.log("showForm: ", showForm);
   return <div>{showForm ? renderForm() : renderDetails()}</div>;
 };
 

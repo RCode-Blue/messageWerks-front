@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { getBackendUrl } from "../../helpers/routeHelpers";
-import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { UserContext } from "../../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import BusinessDetails from "./BusinessDetails";
 
@@ -18,22 +18,26 @@ const BusinessName = (props) => {
   };
 
   return (
-    <div>
-      <div>
+    <section className="section-detail">
+      <>
         {showBusinessDetails ? (
           <BusinessDetails props={businessData} />
         ) : (
           renderBusiness()
         )}
-      </div>
-      <button
-        onClick={() => {
-          setShowBusinessDetails(!showBusinessDetails);
-        }}
+      </>
+
+      <div
+        className="section-detail__icon"
+        onClick={() => setShowBusinessDetails(!showBusinessDetails)}
       >
-        {showBusinessDetails ? "Hide" : "Show"}
-      </button>
-    </div>
+        {showBusinessDetails ? (
+          <FontAwesomeIcon icon={faCaretUp} />
+        ) : (
+          <FontAwesomeIcon icon={faCaretDown} />
+        )}
+      </div>
+    </section>
   );
 };
 

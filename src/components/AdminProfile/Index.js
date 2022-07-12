@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import UsersHeader from "./UsersHeader";
 import BusinessesHeader from "./BusinessesHeader";
+import { checkLocalToken } from "../../helpers/tokenHelpers";
 
 const AdminProfile = () => {
-  // const [showSection, setShowSection]=useState({user:false})
+  const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    if (!checkLocalToken()) {
+      userContext.setUser({ isLoggedIn: false });
+    }
+  });
   return (
-    <div>
-      <div>- Admin Profile -</div>
-      <div>
-        <UsersHeader />
-      </div>
-      <div>
-        <BusinessesHeader />
-      </div>
-    </div>
+    <section className="admin-profile-wrapper">
+      <UsersHeader />
+      <BusinessesHeader />
+    </section>
   );
 };
 

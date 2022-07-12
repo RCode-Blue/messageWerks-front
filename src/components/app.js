@@ -5,9 +5,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserProvider from "../contexts/UserContext";
 
 import Logo from "./Main/Logo";
-import Landing from "./Landing/Landing";
+import Landing from "./Landing";
 import Login from "./Landing/Login";
-import Profile from "./Profile/Profile";
+import Profile from "./Profile";
 
 import "../styles/styles.scss";
 

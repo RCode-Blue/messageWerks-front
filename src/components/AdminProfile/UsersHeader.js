@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { UserContext } from "../../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import UsersList from "./UsersList";
 
@@ -18,7 +20,6 @@ const UsersHeader = () => {
       let token, result;
 
       token = checkLocalToken();
-      // if (!token) return token;
       if (!token) {
         userContext.setUser({ isLoggedIn: false });
       }
@@ -68,10 +69,30 @@ const UsersHeader = () => {
   }, []);
 
   return (
-    <div>
-      <div onClick={() => setShowList(!showList)}>Users Header</div>
+    <section
+      className={`admin-profile-section ${
+        showList ? "admin-profile-section__active" : ""
+      }`}
+    >
+      <div className="admin-profile-section__header">
+        <h1
+          className={`styled-element ${
+            showList ? "styled-element-active" : "styled-element-default"
+          }`}
+        >
+          Users
+        </h1>
+        <div onClick={() => setShowList(!showList)}>
+          {showList ? (
+            <FontAwesomeIcon icon={faCaretUp} />
+          ) : (
+            <FontAwesomeIcon icon={faCaretDown} />
+          )}
+        </div>
+      </div>
+
       {showList ? <UsersList props={userList} /> : null}
-    </div>
+    </section>
   );
 };
 

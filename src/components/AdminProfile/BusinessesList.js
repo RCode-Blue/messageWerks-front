@@ -4,9 +4,8 @@ import BusinessName from "./BusinessName";
 
 const BusinessesList = (props) => {
   const { props: businesses } = props;
-  // console.log("props: ", props);
   return (
-    <div>
+    <div className="section-detail-wrapper">
       {businesses.map((business) => {
         return <BusinessName props={business} key={business.uuid} />;
       })}

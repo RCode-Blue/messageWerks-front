@@ -30,7 +30,6 @@ const Business = (props) => {
     settings: false,
   };
 
-  // const userContext = useContext(UserContext);
   const [expandBusinessMenu, setexpandBusinessMenu] = useState(false);
   const [showDetails, setShowDetails] = useState(initialShowState);
 

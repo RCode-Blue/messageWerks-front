@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { getBackendUrl } from "../../helpers/routeHelpers";
 import { checkLocalToken } from "../../helpers/tokenHelpers";
 import { UserContext } from "../../contexts/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 const BusinessDetails = (props) => {
   const { props: business } = props;
@@ -45,7 +47,6 @@ const BusinessDetails = (props) => {
 
     let response = await fetch(backendUrl, options);
     result = await response.json();
-    console.log(result.data);
     const {
       name,
       address_line1,
@@ -71,77 +72,104 @@ const BusinessDetails = (props) => {
 
   const renderDetails = () => {
     return (
-      <div>
-        <div>{businessData.name}</div>
-        <div>
-          {businessData.address_line1} {businessData.address_line2}
+      <div className="section-detail__show">
+        <div className="section-detail__show__data">
+          <div>{businessData.name}</div>
+          <div>
+            {businessData.address_line1} {businessData.address_line2}
+          </div>
+          <div>{businessData.suburb}</div>
+          <div>{businessData.state}</div>
+          <div>{businessData.country}</div>
+          <div>{businessData.postcode}</div>
         </div>
-        <div>{businessData.suburb}</div>
-        <div>{businessData.state}</div>
-        <div>{businessData.country}</div>
-        <div>{businessData.postcode}</div>
-        <button onClick={() => setShowForm(true)}>Edit</button>
+        <FontAwesomeIcon
+          className="section-detail__show__icon"
+          icon={faEdit}
+          onClick={() => setShowForm(true)}
+        />
       </div>
     );
   };
 
   const renderForm = () => {
     return (
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Business name"
-          value={formData.name}
-          onChange={handleFormDataChange}
-        />
-        <input
-          type="text"
-          name="address_line1"
-          placeholder="Address line 1"
-          value={formData.address_line1}
-          onChange={handleFormDataChange}
-        />
+      <form className="section-detail__form" onSubmit={handleFormSubmit}>
+        <div className="section-detail__form__entry">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Business name"
+            value={formData.name}
+            onChange={handleFormDataChange}
+          />
+        </div>
+        <div className="section-detail__form__entry">
+          <label htmlFor="address_line1">Address line 1:</label>
+          <input
+            type="text"
+            name="address_line1"
+            placeholder="Address line 1"
+            value={formData.address_line1}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
-        <input
-          type="text"
-          name="address_line2"
-          placeholder="Address line 2"
-          value={formData.address_line2}
-          onChange={handleFormDataChange}
-        />
+        <div className="section-detail__form__entry">
+          <label htmlFor="address_line2">Address line 2:</label>
+          <input
+            type="text"
+            name="address_line2"
+            placeholder="Address line 2"
+            value={formData.address_line2}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
-        <input
-          type="text"
-          name="suburb"
-          placeholder="Suburb"
-          value={formData.suburb}
-          onChange={handleFormDataChange}
-        />
+        <div className="section-detail__form__entry">
+          <label htmlFor="suburb">Suburb:</label>
+          <input
+            type="text"
+            name="suburb"
+            placeholder="Suburb"
+            value={formData.suburb}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
-        <input
-          type="text"
-          name="state"
-          placeholder="State"
-          value={formData.state}
-          onChange={handleFormDataChange}
-        />
+        <div className="section-detail__form__entry">
+          <label htmlFor="state">State:</label>
+          <input
+            type="text"
+            name="state"
+            placeholder="State"
+            value={formData.state}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
-        <input
-          type="text"
-          name="country"
-          placeholder="Country"
-          value={formData.country}
-          onChange={handleFormDataChange}
-        />
+        <div className="section-detail__form__entry">
+          <label htmlFor="country">Country:</label>
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            value={formData.country}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
-        <input
-          type="text"
-          name="postcode"
-          placeholder="Postcode"
-          value={formData.postcode}
-          onChange={handleFormDataChange}
-        />
+        <div className="section-detail__form__entry">
+          <label htmlFor="postcode">Postcode:</label>
+          <input
+            type="text"
+            name="postcode"
+            placeholder="Postcode"
+            value={formData.postcode}
+            onChange={handleFormDataChange}
+          />
+        </div>
 
         <button type="submit">Submit</button>
         <button onClick={() => setShowForm(false)}>Cancel</button>
@@ -200,7 +228,6 @@ const BusinessDetails = (props) => {
     };
   }, []);
 
-  console.log("businessData: ", businessData);
   return <div>{showForm ? renderForm() : renderDetails()}</div>;
 };
 
