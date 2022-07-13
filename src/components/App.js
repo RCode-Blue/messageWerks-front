@@ -6,7 +6,7 @@ import UserProvider from "../contexts/UserContext";
 import Logo from "./Main/Logo";
 import Landing from "./Landing/Index";
 import Login from "./Landing/Login";
-import Profile from "./Profile";
+import Profile from "./Profile/Index";
 
 import "../styles/styles.scss";
 
