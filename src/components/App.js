@@ -10,6 +10,7 @@ import Profile from "./Profile/Index";
 
 import "../styles/styles.scss";
 
+// App
 function App() {
   console.log("ENVIRON: ", process.env.ENVIRON);
   return (
