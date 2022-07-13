@@ -14,7 +14,7 @@ import "../styles/styles.scss";
 // App
 function App() {
   // dotenv.config();
-  consoile.log("ENVIRON: ", process.env.ENVIRON);
+  console.log("ENVIRON: ", process.env.ENVIRON);
 
   return (
     <div className="App app-wrapper">
