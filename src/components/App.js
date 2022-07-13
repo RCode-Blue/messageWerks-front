@@ -10,6 +10,7 @@ import Profile from "./Profile/Index";
 
 import "../styles/styles.scss";
 
+// Main program
 function App() {
   return (
     <div className="App app-wrapper">
