@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import PasswordField from "./PasswordField";
-import appSettings from "../../config/appSettings.json";
-import { getBackendUrl } from "../../helpers/routeHelpers";
 import jwt_decode from "jwt-decode";
 
 import { UserContext } from "../../contexts/UserContext";
+
+import { getBackendUrl } from "../../helpers/routeHelpers";
+import appSettings from "../../config/appSettings.json";
+import PasswordField from "./PasswordField";
 
 const emailStateReducer = (state, action) => {
   if (action.type === "EMAIL_ADDRESS_INPUT") {

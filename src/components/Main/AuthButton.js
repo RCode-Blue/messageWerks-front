@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRightFromBracket,
+  faArrowRightToBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../contexts/UserContext";
 
 const AuthButton = (props) => {
   const { btnClassNamePrefix: prefix } = props;

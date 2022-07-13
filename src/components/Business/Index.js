@@ -1,12 +1,5 @@
 import log from "eslint-plugin-react/lib/util/log";
-import React, {
-  useContext,
-  useReducer,
-  useState,
-  useEffect,
-  Fragment,
-} from "react";
-import { UserContext } from "../../contexts/UserContext";
+import React, { useState, Fragment } from "react";
 
 import BusinessDetails from "./BusinessDetails";
 

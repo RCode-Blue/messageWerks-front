@@ -28,7 +28,7 @@ var devConfig = {
 };
 
 const config = (env) => {
-  const environment = env.development ? ".development" : null;
+  const environment = env.development ? ".development" : "";
   return merge(commonConfig(environment), devConfig);
 };
 

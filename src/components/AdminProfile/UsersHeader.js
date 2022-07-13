@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getBackendUrl } from "../../helpers/routeHelpers";
-import { checkLocalToken } from "../../helpers/tokenHelpers";
-import { UserContext } from "../../contexts/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+
+import { checkLocalToken } from "../../helpers/tokenHelpers";
+import { getBackendUrl } from "../../helpers/routeHelpers";
+import { UserContext } from "../../contexts/UserContext";
 
 import UsersList from "./UsersList";
 
