@@ -1,11 +1,5 @@
-import React, {
-  useContext,
-  useReducer,
-  useState,
-  useEffect,
-  Fragment,
-} from "react";
-import { UserContext } from "../../contexts/UserContext";
+import log from "eslint-plugin-react/lib/util/log";
+import React, { useState, Fragment } from "react";
 
 import BusinessDetails from "./BusinessDetails";
 
@@ -22,68 +16,129 @@ const Business = (props) => {
     uuid,
   } = businessDetails;
 
-  const userContext = useContext(UserContext);
-  const [expandBusiness, setexpandBusiness] = useState(false);
-  const [showDetails, setShowDetails] = useState({
+  const initialShowState = {
     business: false,
     emails: false,
     assets: false,
     settings: false,
-  });
+  };
 
-  const setActiveTab = (tabName) => {
-    let scratchState = { ...showDetails };
+  const [expandBusinessMenu, setexpandBusinessMenu] = useState(false);
+  const [showDetails, setShowDetails] = useState(initialShowState);
+
+  const renderBusinessDetails = () => {
+    if (showDetails.business) {
+      return (
+        <section>
+          <BusinessDetails props={businessDetails} />
+        </section>
+      );
+    }
+    if (showDetails.emails) {
+      return <section>EMAILS</section>;
+    }
+    if (showDetails.assets) {
+      return <section>ASSETS</section>;
+    }
+    if (showDetails.settings) {
+      return <section>SETTINGS</section>;
+    }
+
+    return <div></div>;
   };
 
   const renderBusinessDropdown = () => {
-    if (expandBusiness) {
+    if (expandBusinessMenu) {
       return (
-        <menu className="business-menu">
-          <ul>
-            <li
-              className="styled-element"
-              onClick={() => console.log("clicked Business")}
-            >
-              Business
-            </li>
-            <li
-              className="styled-element"
-              onClick={() => setActiveTab("emails")}
-            >
-              Emails
-            </li>
-            <li
-              className="styled-element"
-              onClick={() => setActiveTab("assets")}
-            >
-              Assets
-            </li>
-            <li
-              className="styled-element"
-              onClick={() => setActiveTab("settings")}
-            >
-              Settings
-            </li>
-          </ul>
-        </menu>
+        <div>
+          <menu className="business-menu">
+            <ul>
+              <li
+                className={`styled-element ${
+                  showDetails.business
+                    ? "styled-element-active"
+                    : "styled-element-default"
+                }`}
+                onClick={() => {
+                  setShowDetails({
+                    ...initialShowState,
+                    business: !showDetails.business,
+                  });
+                }}
+              >
+                Business
+              </li>
+
+              <li
+                className={`styled-element ${
+                  showDetails.emails
+                    ? "styled-element-active"
+                    : "styled-element-default"
+                }`}
+                onClick={() =>
+                  setShowDetails({
+                    ...initialShowState,
+                    emails: !showDetails.emails,
+                  })
+                }
+              >
+                Emails
+              </li>
+              <li
+                className={`styled-element ${
+                  showDetails.assets
+                    ? "styled-element-active"
+                    : "styled-element-default"
+                }`}
+                onClick={() =>
+                  setShowDetails({
+                    ...initialShowState,
+                    assets: !showDetails.assets,
+                  })
+                }
+              >
+                Assets
+              </li>
+              <li
+                className={`styled-element ${
+                  showDetails.settings
+                    ? "styled-element-active"
+                    : "styled-element-default"
+                }`}
+                onClick={() =>
+                  setShowDetails({
+                    ...initialShowState,
+                    settings: !showDetails.settings,
+                  })
+                }
+              >
+                Settings
+              </li>
+            </ul>
+          </menu>
+        </div>
       );
+    } else {
+      return <div></div>;
     }
-    return <div>No display</div>;
   };
 
   return (
     <Fragment>
       <div
         className={`styled-element business-title ${
-          expandBusiness ? "styled-element-active" : "styled-element-default"
+          expandBusinessMenu
+            ? "styled-element-active"
+            : "styled-element-default"
         }`}
         onClick={() => {
-          setexpandBusiness(!expandBusiness);
+          setexpandBusinessMenu(!expandBusinessMenu);
         }}
       >
         {name}
       </div>
-      {renderBusinessDropdown()}
+      {expandBusinessMenu ? renderBusinessDropdown() : null}
+      {renderBusinessDetails()}
     </Fragment>
   );
 };

@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
-const Dotenv = require("dotenv-webpack");
 
 const VENDOR_LIBS = ["react", "react-dom"];
 
@@ -41,9 +40,6 @@ var config = (environment) => {
       new HtmlWebpackPlugin({
         template: "public/index.html",
         favicon: "public/favicon.ico",
-      }),
-      new Dotenv({
-        path: `./.env${environment}`,
       }),
     ],
     optimization: {

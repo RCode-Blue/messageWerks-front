@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { UserContext } from "../../contexts/UserContext";
-
 import logo_default from "../../assets/images/rocket_beige.png";
 import logo_admin from "../../assets/images/rocket_peach.png";
+
+import { UserContext } from "../../contexts/UserContext";
 
 const Logo = () => {
   const userContext = useContext(UserContext);

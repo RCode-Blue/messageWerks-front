@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import { useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
+import { UserContext } from "../../contexts/UserContext";
 
 const Footer = () => {
   const userContext = useContext(UserContext);
