@@ -1,6 +1,5 @@
 import React, { StrictMode, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import * as dotenv from "dotenv";
 
 import UserProvider from "../contexts/UserContext";
 
@@ -13,7 +12,6 @@ import "../styles/styles.scss";
 
 // App
 function App() {
-  dotenv.config();
   console.log("ENVIRON: ", process.env.ENVIRON);
 
   return (
