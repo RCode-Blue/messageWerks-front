@@ -12,6 +12,7 @@ import Profile from "./Profile";
 import "../styles/styles.scss";
 
 function App() {
+  console.log("------", process.env.NODE_ENV, "------");
   return (
     <div className="App app-wrapper">
       <StrictMode>
