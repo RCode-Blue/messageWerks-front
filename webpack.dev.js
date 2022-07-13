@@ -1,5 +1,6 @@
 const { merge } = require("webpack-merge");
 const commonConfig = require("./webpack.common");
+const Dotenv = require("dotenv-webpack");
 
 var devConfig = {
   mode: "development",
@@ -25,6 +26,11 @@ var devConfig = {
       },
     ],
   },
+  plugins: [
+    new Dotenv({
+      path: `./.env${environment}`,
+    }),
+  ],
 };
 
 const config = (env) => {
