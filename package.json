@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --mode production",
+    "build": "npm run clean && webpack --env production --stats-error-details --config webpack.prod.js",
     "dev": "webpack serve --env development --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,7 +23,7 @@
   "bugs": {
     "url": "https://github.com/RCode-Blue/messageWerks-front/issues"
   },
-  "homepage": "https://github.com/RCode-Blue/messageWerks-front#readme",
+  "homepage": "./dist/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
