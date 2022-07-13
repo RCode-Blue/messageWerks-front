@@ -1,7 +1,9 @@
 import React, { useContext, useEffect } from "react";
+
 import { UserContext } from "../../contexts/UserContext";
-import UsersHeader from "./UsersHeader";
 import BusinessesHeader from "./BusinessesHeader";
+import UsersHeader from "./UsersHeader";
+
 import { checkLocalToken } from "../../helpers/tokenHelpers";
 
 const AdminProfile = () => {

@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { getBackendUrl } from "../../helpers/routeHelpers";
-import { checkLocalToken } from "../../helpers/tokenHelpers";
-import { UserContext } from "../../contexts/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+
+import { checkLocalToken } from "../../helpers/tokenHelpers";
+import { getBackendUrl } from "../../helpers/routeHelpers";
+import { UserContext } from "../../contexts/UserContext";
 
 const UserDetails = (props) => {
   const { props: user } = props;

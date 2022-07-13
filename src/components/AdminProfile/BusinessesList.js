@@ -1,5 +1,4 @@
 import React from "react";
-
 import BusinessName from "./BusinessName";
 
 const BusinessesList = (props) => {

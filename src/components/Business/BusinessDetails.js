@@ -34,15 +34,6 @@ const BusinessDetails = (props) => {
     let result, token;
     const backendUrl = getBackendUrl("/business/edit");
 
-    /*
-    if (
-      !localStorage.getItem("token") ||
-      localStorage.getItem("token") === "undefined"
-    ) {
-      return userContext.setUser({ isLoggedIn: false });
-    }
-    */
-
     token = checkLocalToken();
     if (!token) {
       userContext.setUser({ isLoggedIn: false });

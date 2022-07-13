@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../../contexts/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import BusinessDetails from "./BusinessDetails";
+import { UserContext } from "../../contexts/UserContext";
 
 const BusinessName = (props) => {
   const { props: business } = props;

@@ -1,9 +1,11 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
+
+import { checkIsAdmin } from "../../helpers/aclHelpers";
+import { checkLocalToken } from "../../helpers/tokenHelpers";
+import { getBackendUrl } from "../../helpers/routeHelpers";
+
 import { UserContext } from "../../contexts/UserContext";
 
-import { checkLocalToken } from "../../helpers/tokenHelpers";
-import { checkIsAdmin } from "../../helpers/aclHelpers";
-import { getBackendUrl } from "../../helpers/routeHelpers";
 import AdminProfile from "../AdminProfile";
 import AuthButton from "../Main/AuthButton";
 import Business from "../Business/Index";
