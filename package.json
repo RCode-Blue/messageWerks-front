@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && webpack --stats-error-details --config webpack.prod.js",
+    "build": "webpack --stats-error-details --config webpack.build.js",
     "dev": "webpack serve --env development --config webpack.dev.js",
+    "prod": "webpack serve --env production --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

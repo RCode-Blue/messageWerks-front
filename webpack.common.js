@@ -1,9 +1,10 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 const VENDOR_LIBS = ["react", "react-dom"];
 
-var config = (environment) => {
+var config = () => {
   return {
     entry: {
       bundle: "./src/index.js",

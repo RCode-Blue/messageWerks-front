@@ -12,7 +12,7 @@ import "../styles/styles.scss";
 
 // App
 function App() {
-  console.log("ENVIRON: ", process.env.ENVIRON);
+  console.log("NODE_ENV: ", process.env.NODE_ENV);
 
   return (
     <div className="App app-wrapper">
