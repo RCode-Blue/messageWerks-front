@@ -50,6 +50,7 @@ const Login = () => {
 
   const submitLogin = (loginCredentials) => {
     const backendUrl = getBackendUrl("/auth/login");
+    console.log("url: ", backendUrl);
 
     let options = {
       method: "POST",
@@ -60,6 +61,7 @@ const Login = () => {
       body: JSON.stringify(loginCredentials),
       redirect: "follow",
     };
+
     try {
       fetch(backendUrl, options)
         .then((result) => result.json())

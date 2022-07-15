@@ -12,7 +12,7 @@ import "../styles/styles.scss";
 
 // App
 function App() {
-  console.log("DEPLOYMENT: ", process.env.DEPLOYMENT);
+  console.log("FILENAME: ", process.env.FILENAME);
 
   return (
     <div className="App app-wrapper">
