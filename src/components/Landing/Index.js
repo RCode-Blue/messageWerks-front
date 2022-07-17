@@ -1,6 +1,3 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
 import AuthButton from "../Main/AuthButton";
 
 const Landing = () => {
@@ -12,10 +9,10 @@ const Landing = () => {
             Login
           </Link>
         </section>
-        {/* <section className="page-content__general">
+        <section className="page-content__general">
           <div className="styled-link">Demo</div>
           <div className="styled-link">Signup</div>
-        </section> */}
+        </section>
         <section className="page-content__authsection styled-link">
           <AuthButton btnClassNamePrefix="page-content" />
         </section>
