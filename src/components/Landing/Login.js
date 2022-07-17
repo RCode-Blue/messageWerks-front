@@ -60,6 +60,7 @@ const Login = () => {
       body: JSON.stringify(loginCredentials),
       redirect: "follow",
     };
+
     try {
       fetch(backendUrl, options)
         .then((result) => result.json())
