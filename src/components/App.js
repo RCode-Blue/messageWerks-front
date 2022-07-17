@@ -10,10 +10,7 @@ import Profile from "./Profile/Index";
 
 import "../styles/styles.scss";
 
-// App
 function App() {
-  console.log("FILENAME: ", process.env.FILENAME);
-
   return (
     <div className="App app-wrapper">
       <StrictMode>

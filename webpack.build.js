@@ -4,12 +4,11 @@ const Dotenv = require("dotenv-webpack");
 
 const buildConfig = {
   mode: "production",
-  // stats: { logging: "verbose" },
+  stats: { logging: "verbose" },
   plugins: [new Dotenv()],
 };
 
 const config = (env) => {
-  // const environment = env.production ? ".production" : "";
   return merge(commonConfig(), buildConfig);
 };
 

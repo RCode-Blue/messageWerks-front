@@ -20,10 +20,6 @@ const prodConfig = (environment) => {
 };
 
 const config = (env) => {
-  console.log("---------------------------------");
-  console.log("- processing 'webpack.prod.js' -");
-  console.log("---------------------------------");
-  console.log("env: ", env);
   const environment = env.production ? ".production" : "";
   return merge(commonConfig(environment), prodConfig(environment));
 };

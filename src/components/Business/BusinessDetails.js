@@ -5,7 +5,10 @@ import { getBackendUrl } from "../../helpers/routeHelpers";
 
 const BusinessDetails = (props) => {
   const [formIsActive, setFormIsActive] = useState(false);
-  const [nameIsValid, setNameIsValid] = useState(true);
+  // const [fomIsValid, setFormIsValid] = useState(
+  //   formData.name ? true : false && formData.address_line1 ? true : false
+  // );
+
   const {
     name,
     address_line1,
@@ -16,7 +19,10 @@ const BusinessDetails = (props) => {
     postcode,
     uuid,
   } = props.props;
-  const [formData, setFormData] = useState({
+
+  // const [nameIsValid, setNameIsValid] = useState(name ? true : false);
+
+  const originalFormState = {
     name: name,
     address_line1: address_line1 || "",
     address_line2: address_line2 || "",
@@ -25,7 +31,19 @@ const BusinessDetails = (props) => {
     country: country || "",
     postcode: postcode || "",
     uuid: uuid,
+  };
+
+  const [formData, setFormData] = useState(originalFormState);
+
+  const [formFieldsValid, setFormFieldsValid] = useState({
+    name: name ? true : false,
+    address_line1: address_line1 ? true : false,
+    suburb: suburb ? true : false,
+    state: state ? true : false,
+    country: country ? true : false,
+    postcode: postcode ? true : false,
   });
+
   const userContext = useContext(UserContext);
 
   const handleFormSubmit = async (e) => {
@@ -76,30 +94,52 @@ const BusinessDetails = (props) => {
     setFormIsActive(false);
   };
 
+  const fieldIsValid = (variable) => {
+    if (variable) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const formIsValid = () => {
+    return Object.values(formFieldsValid).every((value) => value === true);
+  };
+
   const handleFormDataChange = (e) => {
     const fieldName = e.target.name;
-    if (fieldName === "name") {
-      if (e.target.value.langth <= 0) {
-        setNameIsValid(false);
-      }
+    if (
+      fieldName === "name" ||
+      "address_line1" ||
+      "suburb" ||
+      "state" ||
+      "country" ||
+      "postcode"
+    ) {
+      setFormFieldsValid({
+        ...formFieldsValid,
+        [fieldName]: fieldIsValid(e.target.value),
+      });
     }
     setFormData({ ...formData, [fieldName]: e.target.value });
   };
 
   const renderForm = () => {
+    // console.log(formFieldsValid);
+    // console.log(formIsValid);
     return (
       <form className="business-details__form" onSubmit={handleFormSubmit}>
         <input
           type="text"
           name="name"
-          placeholder="Business name"
+          placeholder="* Business name"
           value={formData.name}
           onChange={handleFormDataChange}
         />
         <input
           type="text"
           name="address_line1"
-          placeholder="address line 1"
+          placeholder="* address line 1"
           value={formData.address_line1}
           onChange={handleFormDataChange}
         />
@@ -113,32 +153,34 @@ const BusinessDetails = (props) => {
         <input
           type="text"
           name="suburb"
-          placeholder="suburb"
+          placeholder="* suburb"
           value={formData.suburb}
           onChange={handleFormDataChange}
         />
         <input
           type="text"
           name="state"
-          placeholder="state"
+          placeholder="* state"
           value={formData.state}
           onChange={handleFormDataChange}
         />
         <input
           type="text"
           name="country"
-          placeholder="country"
+          placeholder="* country"
           value={formData.country}
           onChange={handleFormDataChange}
         />
         <input
           type="text"
           name="postcode"
-          placeholder="postcode"
+          placeholder="* postcode"
           value={formData.postcode}
           onChange={handleFormDataChange}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!formIsValid()}>
+          Submit
+        </button>
       </form>
     );
   };
@@ -166,7 +208,12 @@ const BusinessDetails = (props) => {
       {renderContents()}
       <button
         className="business-details__button"
-        onClick={() => setFormIsActive(!formIsActive)}
+        onClick={() => {
+          if (formIsActive) {
+            setFormData(originalFormState);
+          }
+          setFormIsActive(!formIsActive);
+        }}
       >
         {formIsActive ? "Cancel" : "Edit"}
       </button>

@@ -36,10 +36,6 @@ var devConfig = (environment) => {
 };
 
 const config = (env) => {
-  console.log("---------------------------------");
-  console.log("- processing 'webpack.dev.js' -");
-  console.log("env: ", env);
-  console.log("---------------------------------");
   const environment = env.development ? ".development" : "";
   return merge(commonConfig(environment), devConfig(environment));
 };

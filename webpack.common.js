@@ -5,9 +5,6 @@ const Dotenv = require("dotenv-webpack");
 const VENDOR_LIBS = ["react", "react-dom"];
 
 var config = () => {
-  console.log("---------------------------------");
-  console.log("- processing 'webpack.common.js' -");
-  console.log("---------------------------------");
   return {
     entry: {
       bundle: "./src/index.js",
